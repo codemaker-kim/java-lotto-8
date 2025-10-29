@@ -1,5 +1,6 @@
 package lotto.generator;
 
+import static lotto.generator.LottoConstant.PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 public class LottoGeneratorTest {
 
+    private static final int ASSERT_LOTTO_SIZE = 5;
+    private static final int MINIMUM_LOTTO_PRICE = 1;
     private LottoGenerator generator;
 
     @BeforeEach
@@ -18,14 +21,11 @@ public class LottoGeneratorTest {
         generator = new LottoGenerator();
     }
 
-    //TODO: 로또 가격이 달라질 때 테스트가 깨지게 됨.
-    // 이를 고려한 테스트 코드 재작성이 필요
-
     @Test
     @DisplayName("로또 구입금액이 로또 1개 가격으로 나눠떨어지지 않는다면 예외를 발생시킨다.")
     void failGenerateLotto() {
         // given
-        final int money = 12500;
+        final int money = PRICE.getValue() - MINIMUM_LOTTO_PRICE;
 
         // when & then
         assertThatThrownBy(() -> generator.generateLotto(money))
@@ -37,12 +37,12 @@ public class LottoGeneratorTest {
     @DisplayName("로또 구입금액을 로또 1개 가격으로 나눈 수만큼의 로또를 생성한다.")
     void generateLotto() {
         //given
-        final int money = 3000;
+        final int money = PRICE.getValue() * ASSERT_LOTTO_SIZE;
 
         //when
         List<Lotto> lottos = generator.generateLotto(money);
 
         //then
-        assertThat(lottos).hasSize(3);
+        assertThat(lottos).hasSize(ASSERT_LOTTO_SIZE);
     }
 }
