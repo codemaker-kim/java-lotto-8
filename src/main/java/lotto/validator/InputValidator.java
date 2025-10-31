@@ -8,7 +8,7 @@ public class InputValidator {
     }
 
     private void validateEmpty(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("[ERROR] 구입금액 입력이 비어있습니다.");
         }
     }
