@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoGeneratorTest {
+class LottoGeneratorTest {
 
     private static final int ASSERT_LOTTO_SIZE = 5;
     private static final int MINIMUM_LOTTO_PRICE = 1;
