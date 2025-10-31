@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class InputValidatorTest {
@@ -17,13 +18,11 @@ public class InputValidatorTest {
         validator = new InputValidator();
     }
 
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("로또 구입금액 입력이 비어있을 경우, 예외를 발생시킨다.")
-    void emptyMoneyInput() {
-        // given
-        final String input = "";
-
-        // when & then
+    void emptyMoneyInput(String input) {
+        // assert
         assertThatThrownBy(() -> validator.validate(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구입금액 입력이 비어있습니다.");
