@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 public class LottoGenerator {
 
     private final int ZERO = 0;
 
-    public List<Lotto> generateLotto(int money) {
+    public Lottos generateLotto(int money) {
         validateMoneyDivisibleByPrice(money);
         validateMoneyNotZero(money);
 
@@ -26,7 +27,7 @@ public class LottoGenerator {
             lottos.add(createLotto());
         }
 
-        return lottos;
+        return Lottos.from(lottos);
     }
 
     private void validateMoneyDivisibleByPrice(int money) {
