@@ -1,6 +1,6 @@
 package lotto.validator;
 
-public class InputValidator {
+public class MoneyInputValidator {
     public void validate(String input) {
         validateEmpty(input);
 
