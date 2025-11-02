@@ -1,9 +1,12 @@
 package lotto.domain;
 
 import static java.util.stream.IntStream.rangeClosed;
+import static lotto.generator.LottoConstant.MAXIMUM_NUMBER;
+import static lotto.generator.LottoConstant.MINIMUM_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lotto.generator.LottoConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +24,7 @@ class WinningNumberTest {
     }
 
     @ParameterizedTest
-    @DisplayName("당첨 번호 갯수가 6개가 아니라면 예외가 발생한다.")
+    @DisplayName("당첨 번호 갯수가 6개가 아니라면 예외를 발생시킨다.")
     @ValueSource(ints = {1, 2, 3, 4, 5, 7, 8, 9, 10})
     void invalidWinningNumberCount(int count) {
         //given
@@ -32,5 +35,19 @@ class WinningNumberTest {
         assertThatThrownBy(() -> new WinningNumber(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("당첨번호는 6개여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("당첨 번호 내 숫자가 로또 숫자 범위를 초과한다면 예외를 발생시킨다.")
+    void overLottoRangeInput() {
+        // given
+        final int lowThanMin = MINIMUM_NUMBER.getValue() - 1;
+        final int higherThanMax = MAXIMUM_NUMBER.getValue() + 1;
+        List<Integer> numbers = List.of(1, 2, 3, 4, lowThanMin, higherThanMax);
+
+        // when & then
+        assertThatThrownBy(() -> new WinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("당첨 번호 내의 숫자가 로또 범위를 초과합니다.");
     }
 }
