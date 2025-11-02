@@ -1,12 +1,13 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.generator.LottoConstant;
 
 public class WinningNumber {
 
     private final List<Integer> numbers;
 
-    public WinningNumber (List<Integer> numbers) {
+    public WinningNumber(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
@@ -24,6 +25,14 @@ public class WinningNumber {
 
         if (distinctCount != numbersSize) {
             throw new IllegalArgumentException("[ERROR] 당첨번호에 중복되는 숫자가 존재합니다.");
+        }
+
+        boolean isOverLottoRange = numbers.stream()
+                .anyMatch(number -> number < LottoConstant.MINIMUM_NUMBER.getValue()
+                        || number > LottoConstant.MAXIMUM_NUMBER.getValue());
+
+        if (isOverLottoRange) {
+            throw new IllegalStateException("[ERROR] 당첨번호에 로또 숫자 범위를 초과하는 숫자가 존재합니다.");
         }
     }
 }
