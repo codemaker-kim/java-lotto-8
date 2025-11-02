@@ -53,7 +53,8 @@ class LottoGeneratorTest {
 
         //when
         int count = generator.generateLotto(money)
-                .count();
+                .getLottoNumbers()
+                .size();
 
         //then
         assertThat(count).isEqualTo(ASSERT_LOTTO_SIZE);
