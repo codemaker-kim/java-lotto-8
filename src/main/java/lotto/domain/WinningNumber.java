@@ -32,7 +32,7 @@ public class WinningNumber {
                         || number > LottoConstant.MAXIMUM_NUMBER.getValue());
 
         if (isOverLottoRange) {
-            throw new IllegalStateException("[ERROR] 당첨번호에 로또 숫자 범위를 초과하는 숫자가 존재합니다.");
+            throw new IllegalStateException("[ERROR] 당첨 번호 내의 숫자가 로또 범위를 초과합니다.");
         }
     }
 }
