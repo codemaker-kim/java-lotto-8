@@ -6,7 +6,6 @@ import static lotto.generator.LottoConstant.MINIMUM_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import lotto.generator.LottoConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +15,7 @@ class WinningNumberTest {
 
     @Test
     @DisplayName("중복되는 번호가 존재할 경우, 예외를 발생시킨다.")
-    void duplicationNumber() throws Exception {
+    void duplicationNumber() {
         // assert
         assertThatThrownBy(() -> new WinningNumber(List.of(1, 2, 3, 4, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -47,7 +46,7 @@ class WinningNumberTest {
 
         // when & then
         assertThatThrownBy(() -> new WinningNumber(numbers))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("당첨 번호 내의 숫자가 로또 범위를 초과합니다.");
     }
 }
