@@ -15,13 +15,15 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int count() {
-        return lottos.size();
-    }
-
     private static void validate(List<Lotto> lottos) {
         if (lottos == null || lottos.isEmpty()) {
-            throw new IllegalStateException("[ERROR] 로또 목록이 비어있으면 안 됩니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 목록이 비어있으면 안 됩니다.");
         }
+    }
+
+    public List<String> getLottoNumbers() {
+        return lottos.stream()
+                .map(Lotto::toString)
+                .toList();
     }
 }
