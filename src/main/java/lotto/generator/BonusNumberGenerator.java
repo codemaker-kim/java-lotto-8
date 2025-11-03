@@ -1,8 +1,10 @@
 package lotto.generator;
 
+import static lotto.global.LottoConstant.MAXIMUM_NUMBER;
+import static lotto.global.LottoConstant.MINIMUM_NUMBER;
+
 import java.util.List;
 import lotto.domain.BonusNumber;
-import lotto.global.LottoConstant;
 
 public class BonusNumberGenerator {
 
@@ -23,7 +25,7 @@ public class BonusNumberGenerator {
     }
 
     private boolean isOverLottoRange(int number) {
-        return number > LottoConstant.MAXIMUM_NUMBER.getValue() ||
-                number < LottoConstant.MINIMUM_NUMBER.getValue();
+        return number > MAXIMUM_NUMBER.getValue() ||
+                number < MINIMUM_NUMBER.getValue();
     }
 }
