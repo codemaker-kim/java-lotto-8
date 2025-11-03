@@ -17,8 +17,8 @@ public class WinningStatisticCalculator {
 
     private static final int TO_PERCENT = 100;
 
-    private WinningNumber winningNumber;
-    private BonusNumber bonusNumber;
+    private final WinningNumber winningNumber;
+    private final BonusNumber bonusNumber;
 
     public WinningStatisticCalculator(WinningNumber winningNumber, BonusNumber bonusNumber) {
         this.winningNumber = winningNumber;
