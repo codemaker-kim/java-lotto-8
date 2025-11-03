@@ -14,6 +14,8 @@ import lotto.domain.WinningNumber;
 
 public class WinningStatisticCalculator {
 
+    private static final int TO_PERCENT = 100;
+
     private WinningNumber winningNumber;
     private BonusNumber bonusNumber;
 
@@ -78,6 +80,7 @@ public class WinningStatisticCalculator {
         int totalCost = totalLottos * PRICE.getValue();
 
         return BigDecimal.valueOf(totalPrize)
-                .divide(BigDecimal.valueOf(totalCost), 2, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(totalCost), 3, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(TO_PERCENT));
     }
 }
