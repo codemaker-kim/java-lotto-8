@@ -35,7 +35,7 @@ public class LottoOutputView {
     }
 
     public static void rateView(double rate) {
-        String message = String.format("총 수익률은 %.2f\\%입니다.", rate);
+        String message = String.format("총 수익률은 %.2f%%입니다.", rate);
 
         System.out.println(message);
     }
