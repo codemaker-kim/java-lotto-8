@@ -1,5 +1,8 @@
 package lotto.view;
 
+import static lotto.calculator.WinningPrize.*;
+
+import java.text.DecimalFormat;
 import java.util.Map;
 import lotto.calculator.WinningPrize;
 import lotto.view.dto.LottoStringDto;
@@ -19,23 +22,34 @@ public class LottoOutputView {
     public static void statisticView(final Map<WinningPrize, Integer> winningPrizes) {
         System.out.println("당첨 통계\n---");
 
-        for (WinningPrize prize : WinningPrize.values()) {
+        for (WinningPrize prize : values()) {
             printWinningStatistic(prize, winningPrizes.get(prize));
         }
     }
 
     private static void printWinningStatistic(WinningPrize prize, int count) {
-        String message = String.format("%d개 일치 (%d원) - %d개",
+        String message = createWinningMessage(prize, count);
+        System.out.println(message);
+    }
+
+    private static String createWinningMessage(WinningPrize prize, int count) {
+        if (prize == SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%,d원) - %d개",
+                    prize.getMatchCount(),
+                    prize.getPrize(),
+                    count);
+        }
+
+        return String.format("%d개 일치 (%,d원) - %d개",
                 prize.getMatchCount(),
                 prize.getPrize(),
                 count
         );
-
-        System.out.println(message);
     }
 
     public static void rateView(double rate) {
-        String message = String.format("총 수익률은 %.2f%%입니다.", rate);
+        DecimalFormat df = new DecimalFormat("#.##");
+        String message = String.format("총 수익률은 %s%%입니다.", df.format(rate));
 
         System.out.println(message);
     }
