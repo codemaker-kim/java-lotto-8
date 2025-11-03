@@ -28,7 +28,7 @@ public class BonusNumberGeneratorTest {
 
         // when & then
         assertThatThrownBy(() -> generator.generateBonusNumber(number))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
@@ -38,7 +38,7 @@ public class BonusNumberGeneratorTest {
     void overLottoNumberRange(int number) {
         // when & then
         assertThatThrownBy(() -> generator.generateBonusNumber(number))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("보너스 번호가 로또 숫자 범위에 포함되지 않습니다.");
     }
 
