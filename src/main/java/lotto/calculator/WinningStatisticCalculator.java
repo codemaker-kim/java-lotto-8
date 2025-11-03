@@ -1,6 +1,6 @@
 package lotto.calculator;
 
-import static lotto.generator.LottoConstant.PRICE;
+import static lotto.global.LottoConstant.PRICE;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,6 +11,7 @@ import lotto.calculator.dto.WinningInfoDto;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.WinningNumber;
+import lotto.global.WinningPrize;
 
 public class WinningStatisticCalculator {
 

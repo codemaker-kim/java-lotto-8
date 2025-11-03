@@ -2,6 +2,7 @@ package lotto.generator;
 
 import java.util.List;
 import lotto.domain.BonusNumber;
+import lotto.global.LottoConstant;
 
 public class BonusNumberGenerator {
 

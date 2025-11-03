@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import static java.util.stream.IntStream.rangeClosed;
-import static lotto.generator.LottoConstant.MAXIMUM_NUMBER;
-import static lotto.generator.LottoConstant.MINIMUM_NUMBER;
+import static lotto.global.LottoConstant.MAXIMUM_NUMBER;
+import static lotto.global.LottoConstant.MINIMUM_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;

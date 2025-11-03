@@ -1,10 +1,10 @@
 package lotto.view;
 
-import static lotto.calculator.WinningPrize.*;
+import static lotto.global.WinningPrize.*;
 
 import java.text.DecimalFormat;
 import java.util.Map;
-import lotto.calculator.WinningPrize;
+import lotto.global.WinningPrize;
 import lotto.view.dto.LottoStringDto;
 
 public class LottoOutputView {

@@ -1,6 +1,6 @@
 package lotto.generator;
 
-import static lotto.generator.LottoConstant.PRICE;
+import static lotto.global.LottoConstant.PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

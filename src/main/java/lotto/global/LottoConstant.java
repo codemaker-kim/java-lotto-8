@@ -1,4 +1,4 @@
-package lotto.generator;
+package lotto.global;
 
 public enum LottoConstant {
     PRICE(1000),

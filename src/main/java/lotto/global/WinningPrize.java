@@ -1,4 +1,4 @@
-package lotto.calculator;
+package lotto.global;
 
 public enum WinningPrize {
 

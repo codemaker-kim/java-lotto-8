@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.generator.LottoConstant;
+import lotto.global.LottoConstant;
 
 public class WinningNumber {
 

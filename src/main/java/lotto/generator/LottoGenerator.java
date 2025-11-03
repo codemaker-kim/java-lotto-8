@@ -1,9 +1,9 @@
 package lotto.generator;
 
-import static lotto.generator.LottoConstant.MAXIMUM_NUMBER;
-import static lotto.generator.LottoConstant.MINIMUM_NUMBER;
-import static lotto.generator.LottoConstant.PRICE;
-import static lotto.generator.LottoConstant.SIZE;
+import static lotto.global.LottoConstant.MAXIMUM_NUMBER;
+import static lotto.global.LottoConstant.MINIMUM_NUMBER;
+import static lotto.global.LottoConstant.PRICE;
+import static lotto.global.LottoConstant.SIZE;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
