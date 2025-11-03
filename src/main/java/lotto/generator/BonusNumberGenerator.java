@@ -5,19 +5,13 @@ import lotto.domain.BonusNumber;
 
 public class BonusNumberGenerator {
 
-    private List<Integer> winningNumbers;
-
-    public BonusNumberGenerator(List<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
-    }
-
-    public BonusNumber generateBonusNumber(int number) {
-        validate(number);
+    public BonusNumber generateBonusNumber(int number, List<Integer> winningNumbers) {
+        validate(number, winningNumbers);
 
         return new BonusNumber(number);
     }
 
-    private void validate(int number) {
+    private void validate(int number, List<Integer> winningNumbers) {
         if (winningNumbers.contains(number)) {
             throw new IllegalStateException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
