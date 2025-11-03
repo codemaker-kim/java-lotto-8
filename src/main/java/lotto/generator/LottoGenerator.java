@@ -43,11 +43,11 @@ public class LottoGenerator {
     }
 
     private Lotto createLotto() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(
+        List<Integer> numbers = new ArrayList<>(Randoms.pickUniqueNumbersInRange(
                 MINIMUM_NUMBER.getValue(),
                 MAXIMUM_NUMBER.getValue(),
                 SIZE.getValue()
-        );
+        ));
 
         Collections.sort(numbers);
 
