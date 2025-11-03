@@ -26,60 +26,56 @@ public class WinningStatisticCalculator {
     }
 
     public WinningInfoDto calculateWinningStatistic(LottosDto dto) {
-        Map<WinningPrize, Integer> winningPrizes = new EnumMap<>(WinningPrize.class);
+        Map<WinningPrize, Integer> winningPrizes = initializeWinningPrizes();
+        countWinningLottos(dto, winningPrizes);
+        BigDecimal winningRate = calculateWinningRate(winningPrizes, dto.lottos().size());
 
-        // 모든 등수를 0으로 초기화
+        return new WinningInfoDto(winningPrizes, winningRate);
+    }
+
+    private Map<WinningPrize, Integer> initializeWinningPrizes() {
+        Map<WinningPrize, Integer> winningPrizes = new EnumMap<>(WinningPrize.class);
         for (WinningPrize prize : WinningPrize.values()) {
             winningPrizes.put(prize, 0);
         }
+        return winningPrizes;
+    }
 
-        // 각 로또의 당첨 여부 확인
+    private void countWinningLottos(LottosDto dto, Map<WinningPrize, Integer> winningPrizes) {
         dto.lottos().forEach(lotto -> {
             WinningPrize prize = determineWinningPrize(lotto);
             if (prize != null) {
                 winningPrizes.put(prize, winningPrizes.get(prize) + 1);
             }
         });
-
-        // 수익률 계산
-        BigDecimal winningRate = calculateWinningRate(winningPrizes, dto.lottos().size());
-
-        return new WinningInfoDto(winningPrizes, winningRate);
     }
 
     private WinningPrize determineWinningPrize(Lotto lotto) {
         int matchingNumbers = lotto.countMatchingNumbers(winningNumber);
         boolean hasBonusNumber = lotto.containsBonusNumber(bonusNumber);
 
-        if (matchingNumbers == 6) {
-            return WinningPrize.FIRST;
-        }
-        if (matchingNumbers == 5 && hasBonusNumber) {
-            return WinningPrize.SECOND;
-        }
-        if (matchingNumbers == 5) {
-            return WinningPrize.THIRD;
-        }
-        if (matchingNumbers == 4) {
-            return WinningPrize.FOURTH;
-        }
-        if (matchingNumbers == 3) {
-            return WinningPrize.FIFTH;
-        }
-        return null; // 당첨되지 않음
+        return WinningPrize.findByCondition(matchingNumbers, hasBonusNumber)
+                .orElse(null);
     }
 
     private BigDecimal calculateWinningRate(Map<WinningPrize, Integer> winningPrizes, int totalLottos) {
-        int totalPrize = 0;
+        int totalPrize = calculateTotalPrize(winningPrizes);
+        int totalCost = totalLottos * PRICE.getValue();
 
+        return convertToPercentage(totalPrize, totalCost);
+    }
+
+    private int calculateTotalPrize(Map<WinningPrize, Integer> winningPrizes) {
+        int totalPrize = 0;
         for (Map.Entry<WinningPrize, Integer> entry : winningPrizes.entrySet()) {
             WinningPrize prize = entry.getKey();
             int count = entry.getValue();
             totalPrize += prize.getPrize() * count;
         }
+        return totalPrize;
+    }
 
-        int totalCost = totalLottos * PRICE.getValue();
-
+    private BigDecimal convertToPercentage(int totalPrize, int totalCost) {
         return BigDecimal.valueOf(totalPrize)
                 .divide(BigDecimal.valueOf(totalCost), 3, RoundingMode.HALF_UP)
                 .multiply(BigDecimal.valueOf(TO_PERCENT));
