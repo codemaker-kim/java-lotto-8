@@ -14,10 +14,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class BonusNumberGeneratorTest {
     private BonusNumberGenerator generator;
+    private List<Integer> winningNumbers;
 
     @BeforeEach
     void setUp() {
-        generator = new BonusNumberGenerator(List.of(3, 4, 5, 6, 7, 8));
+        generator = new BonusNumberGenerator();
+        winningNumbers = List.of(3, 4, 5, 6, 7, 8);
     }
 
     @Test
@@ -27,7 +29,7 @@ public class BonusNumberGeneratorTest {
         final int number = 3;
 
         // when & then
-        assertThatThrownBy(() -> generator.generateBonusNumber(number))
+        assertThatThrownBy(() -> generator.generateBonusNumber(number, winningNumbers))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
@@ -36,8 +38,8 @@ public class BonusNumberGeneratorTest {
     @MethodSource("invalidNumbers")
     @DisplayName("보너스 번호가 로또 숫자 범위에 포함되지 않는다면 예외를 발생시킨다.")
     void overLottoNumberRange(int number) {
-        // when & then
-        assertThatThrownBy(() -> generator.generateBonusNumber(number))
+        // assert
+        assertThatThrownBy(() -> generator.generateBonusNumber(number, winningNumbers))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("보너스 번호가 로또 숫자 범위에 포함되지 않습니다.");
     }
