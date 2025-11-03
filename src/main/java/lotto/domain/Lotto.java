@@ -26,6 +26,16 @@ public class Lotto {
         }
     }
 
+    public int countMatchingNumbers(WinningNumber winningNumber) {
+        return (int) numbers.stream()
+                .filter(winningNumber::contains)
+                .count();
+    }
+
+    public boolean containsBonusNumber(BonusNumber bonusNumber) {
+        return numbers.contains(bonusNumber.number());
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
