@@ -53,7 +53,7 @@ class WinningStatisticCalculatorTest {
                 .get(FIFTH))
                 .isEqualTo(1);
 
-        assertThat(result.winningRate().doubleValue()).isEqualTo(507513.75);
+        assertThat(result.winningRate().doubleValue()).isEqualTo(5.0751375E7);
     }
 
     private List<Lotto> createLottoList() {
